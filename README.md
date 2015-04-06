@@ -5,5 +5,6 @@ Samples from superbible using lwjgl.
 
 **For IntelliJ IDEA** 
 
-Select *Run > Edit Configuration > Application* and 
-set VM option -Djava.library.path=target/natives and then run application.
+* Select *Run > Edit Configuration > Application*
+* Set VM option -Djava.library.path=**target/natives** 
+* Run application
