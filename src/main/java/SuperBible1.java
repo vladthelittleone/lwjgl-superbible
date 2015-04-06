@@ -18,7 +18,7 @@ import static org.lwjgl.opengl.GL30.*;
  * • glCompileShader() compiles whatever source code is contained in the shader object.
  * • glCreateProgram() creates a program object to which you can attach shader objects.
  * • glAttachShader() attaches a shader object to a program object.
- *￼• glLinkProgram() links all of the shader objects attached to a program object together.
+ * ￼• glLinkProgram() links all of the shader objects attached to a program object together.
  * • glDeleteShader() deletes a shader object. Once a shader has been linked into a program object, the program contains the binary code and the shader is no longer needed.
  */
 public class SuperBible1
