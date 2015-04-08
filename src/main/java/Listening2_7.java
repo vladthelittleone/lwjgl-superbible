@@ -25,7 +25,7 @@ import static org.lwjgl.opengl.GL30.*;
  * ￼• glLinkProgram() links all of the shader objects attached to a program object together.
  * • glDeleteShader() deletes a shader object. Once a shader has been linked into a program object, the program contains the binary code and the shader is no longer needed.
  */
-public class SuperBible1
+public class Listening2_7
 {
     // Source code for vertex shader
     private final String vertexShaderSource =
@@ -82,7 +82,6 @@ public class SuperBible1
 
     private void shutdown()
     {
-        glDeleteVertexArrays(vao);
         glDeleteProgram(renderingProgram);
         glDeleteVertexArrays(vao);
     }
@@ -165,7 +164,7 @@ public class SuperBible1
 
     public static void main(String[] argv)
     {
-        SuperBible1 superBible1 = new SuperBible1();
-        superBible1.start();
+        Listening2_7 listening = new Listening2_7();
+        listening.start();
     }
 }
