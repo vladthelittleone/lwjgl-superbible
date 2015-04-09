@@ -7,6 +7,8 @@ import utils.ShaderProgramBuilder;
 import utils.ShaderProgramBuilder.ShaderProgram;
 import utils.Utils;
 
+import java.nio.FloatBuffer;
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 
@@ -68,7 +70,7 @@ public class Listening2_7
         long currentTime = System.currentTimeMillis();
 
         // Simply clear the window with different colors
-        glClearBuffer(GL_COLOR, 0, Utils.createClearFloatBuffer(currentTime));
+        glClearBuffer(GL_COLOR, 0, createClearFloatBuffer(currentTime));
 
         glPointSize(40f);
 
@@ -105,6 +107,17 @@ public class Listening2_7
 
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
+    }
+
+    private static FloatBuffer createClearFloatBuffer(long currentTime)
+    {
+        final float red[] = {
+                (float) (Math.sin(currentTime) * 0.5f + 0.5f),
+                (float) (Math.cos(currentTime) * 0.5f + 0.5f),
+                0.0f,
+                1.0f};
+
+        return Utils.createFloatBuffer(red);
     }
 
     /**

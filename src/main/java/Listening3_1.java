@@ -7,19 +7,20 @@ import java.io.IOException;
 import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL20.glVertexAttrib4f;
 import static org.lwjgl.opengl.GL30.*;
 
 /**
  * @author Skurishin Vladislav
- * @since 09.04.15
+ * @since 10.04.15
  */
-public class Listening2_9 extends AbstractDisplay
+public class Listening3_1 extends AbstractDisplay
 {
     private ShaderProgramBuilder.ShaderProgram program;
 
     private int vao;
 
-    public Listening2_9() throws Exception
+    public Listening3_1() throws Exception
     {
         super(new DisplayMode(800, 600), Utils.createContextAttribsForMac());
     }
@@ -36,7 +37,7 @@ public class Listening2_9 extends AbstractDisplay
     {
         program = ShaderProgramBuilder
                 .program()
-                .compileVertexShader(Utils.readFromFile("src/main/shaders/listening2.9.vert"))
+                .compileVertexShader(Utils.readFromFile("src/main/shaders/listening3.1.vert"))
                 .compileFragmentShader(Utils.readFromFile("src/main/shaders/listening2.9.frag"))
                 .createProgram();
 
@@ -57,14 +58,15 @@ public class Listening2_9 extends AbstractDisplay
         // Use the program object we created earlier for rendering
         program.use();
 
+
+        // Update the value of input attribute 0
+        glVertexAttrib4f(0, (float) (Math.sin(currentTime) * 0.5f),
+                (float) (Math.cos(currentTime) * 0.6f),
+                0.0f,
+                0.0f);
+
         // Draw one triangle
         glDrawArrays(GL_TRIANGLES, 0, 3);
-    }
-
-    @Override
-    protected boolean withLoopRender()
-    {
-        return false;
     }
 
     private static FloatBuffer createClearFloatBuffer(long currentTime)
@@ -80,6 +82,7 @@ public class Listening2_9 extends AbstractDisplay
 
     public static void main(String[] argv) throws Exception
     {
-        new Listening2_9();
+        new Listening3_1();
     }
 }
+
