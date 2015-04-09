@@ -1,9 +1,10 @@
 # lwjgl-superbible
-Samples from superbible using lwjgl.
+Samples from [OpenGL SuperBible](http://www.openglsuperbible.com/) by Graham Sellers Richard S. Wright Nicholas Haemel using lwjgl.
 
 ## Listenings
 
 * [Listening 2.7](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/Listening2_7.java)
+* [Listening 2.9](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/Listening2_9.java)
 
 ## Set library path
 
