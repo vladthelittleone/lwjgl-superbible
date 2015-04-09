@@ -3,7 +3,7 @@ Samples from superbible using lwjgl.
 
 ## Listenings
 
-* [Listening 2.7](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/SuperBible1.java)
+* [Listening 2.7](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/Listening2_7.java)
 
 ## Set library path
 
