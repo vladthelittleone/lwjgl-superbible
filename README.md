@@ -5,6 +5,7 @@ Samples from [OpenGL SuperBible](http://www.openglsuperbible.com/) by Graham Sel
 
 * [Listening 2.7](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/Listening2_7.java)
 * [Listening 2.9](https://github.com/vladthelittleone/lwjgl-superbible/blob/master/src/main/java/Listening2_9.java)
+
 ## Set library path
 
 **For IntelliJ IDEA** 
