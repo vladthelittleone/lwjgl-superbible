@@ -1,15 +1,13 @@
-import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.ContextAttribs;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.PixelFormat;
+import utils.ShaderProgramBuilder;
+import utils.ShaderProgramBuilder.ShaderProgram;
+import utils.Utils;
 
-import java.nio.FloatBuffer;
-
-import static java.lang.String.format;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
 /**
@@ -44,7 +42,7 @@ public class Listening2_7
             "    color = vec4(0.0, 0.8, 1.0, 1.0);          \n" +
             "}                                              \n";
 
-    private int renderingProgram;
+    private ShaderProgram program;
 
     private int vao;
 
@@ -70,19 +68,19 @@ public class Listening2_7
         long currentTime = System.currentTimeMillis();
 
         // Simply clear the window with different colors
-        glClearBuffer(GL_COLOR, 0, createClearFloatBuffer(currentTime));
+        glClearBuffer(GL_COLOR, 0, Utils.createClearFloatBuffer(currentTime));
 
         glPointSize(40f);
 
         // Use the program object we created earlier for rendering
-        glUseProgram(renderingProgram);
+        program.use();
 
         glDrawArrays(GL_POINTS, 0, 1);
     }
 
     private void shutdown()
     {
-        glDeleteProgram(renderingProgram);
+        program.delete();
         glDeleteVertexArrays(vao);
     }
 
@@ -99,59 +97,14 @@ public class Listening2_7
             System.exit(0);
         }
 
-        renderingProgram = compileShaders(vertexShaderSource, fragmentShaderSource);
+        program = ShaderProgramBuilder
+                .program()
+                .compileVertexShader(vertexShaderSource)
+                .compileFragmentShader(fragmentShaderSource)
+                .createProgram();
+
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
-    }
-
-    private int compileShaders(String vertexShaderSource, String fragmentShaderSource)
-    {
-        // Create and compile vertex shader
-        int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexShader, vertexShaderSource);
-        glCompileShader(vertexShader);
-
-        if(glGetShaderi(vertexShader, GL_COMPILE_STATUS) == GL_FALSE) {
-            String log = glGetShaderInfoLog(vertexShader, glGetShaderi(vertexShader, GL_INFO_LOG_LENGTH));
-            System.err.println(format("Failure in compiling vertex shader. Error log: %s", log));
-            Display.destroy();
-        }
-
-        // Create and compile fragment shader
-        int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragmentShader, fragmentShaderSource);
-        glCompileShader(fragmentShader);
-
-        if(glGetShaderi(fragmentShader, GL_COMPILE_STATUS) == GL_FALSE) {
-            String log = glGetShaderInfoLog(fragmentShader, glGetShaderi(fragmentShader, GL_INFO_LOG_LENGTH));
-            System.err.println(format("Failure in compiling fragment shader. Error log: %s", log));
-            Display.destroy();
-        }
-
-        // Create program, attach shaders to it, and link it
-        int program = glCreateProgram();
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, fragmentShader);
-        glLinkProgram(program);
-
-        // Delete the shaders as the program has them now
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
-
-        return program;
-    }
-
-    private FloatBuffer createClearFloatBuffer(long currentTime)
-    {
-        final float red[] = {
-                (float) (Math.sin(currentTime) * 0.5f + 0.5f),
-                (float) (Math.cos(currentTime) * 0.5f + 0.5f),
-                0.0f,
-                1.0f};
-
-        FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(red.length).put(red);
-        floatBuffer.flip();
-        return floatBuffer;
     }
 
     /**
