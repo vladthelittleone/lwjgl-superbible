@@ -38,7 +38,7 @@ public class Listening3_1 extends AbstractDisplay
         program = ShaderProgramBuilder
                 .program()
                 .compileVertexShader(Utils.readFromFile("src/main/shaders/listening3.1.vert"))
-                .compileFragmentShader(Utils.readFromFile("src/main/shaders/listening2.9.frag"))
+                .compileFragmentShader(Utils.readFromFile("src/main/shaders/listening3.1.frag"))
                 .createProgram();
 
         vao = glGenVertexArrays();
@@ -64,6 +64,8 @@ public class Listening3_1 extends AbstractDisplay
                 (float) (Math.cos(currentTime) * 0.6f),
                 0.0f,
                 0.0f);
+
+        glVertexAttrib4f(1, 0.0f, 0.8f, 1.0f, 1.0f);
 
         // Draw one triangle
         glDrawArrays(GL_TRIANGLES, 0, 3);
